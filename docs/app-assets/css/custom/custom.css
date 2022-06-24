@@ -1,0 +1,26 @@
+/*================================================================================
+	Item Name: Materialize - Material Design Admin Template
+	Version: 5.0
+	Author: PIXINVENT
+	Author URL: https://themeforest.net/user/pixinvent/portfolio
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+.ancho100{width: 100%;}
+.link_refer{padding-left: 11% !important;color:rgba(0,0,0,.87);border:1px solid #efefef;background:rgba(230,230,230,.3);font-size:16px;font-weight:400;display:block;box-sizing:border-box;width:100%;margin-bottom:0;padding:8px 8px 8px 65px;-webkit-transition:all .2s ease;transition:all .2s ease;border:none;border-radius:3px;outline:0;background:rgba(255,255,255,.3);-webkit-appearance:textfield;-moz-appearance:textfield;appearance:textfield}
+.break{word-break:break-all;}
+#main .faq-search-image, #faq-detail .faq-search-image{background-image:url(../../images/gallery/faq-search.jpg);background-repeat:no-repeat;background-size:cover}
+#main .search-shadow{width:95%;padding-left:1.3rem;border-radius:3rem;box-shadow:0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12),0 8px 10px -7px rgba(0,0,0,.2)}
+.brand-sidebar span.logo-text{font-size: 18px !important;}
+.gradient-45deg-light-blue-cyan,.gradient-45deg-red-pink,.gradient-45deg-amber-amber,.gradient-45deg-green-teal{background: linear-gradient(45deg,#000,#5b3cea)!important;}
+.gradient-45deg-light-blue-cyan{background: linear-gradient(45deg,#000,#5b3cea)!important;}
+.gradient-45deg-red-pink{background: linear-gradient(45deg,#f90a76,#000)!important;}
+.gradient-45deg-amber-amber{background: linear-gradient(45deg,#2e5be5,#221656)!important;}
+.gradient-45deg-green-teal{background: linear-gradient(45deg,#f90a76,#221656)!important;}
+.btn, .btn-large, .btn-small{background-color:#f90a76;}
+.btn-small:hover, .btn:hover,.amber.darken-4:hover{background-color:#590fb7 !important;}
+.amber.darken-4{background-color: #f90a76 !important;}
+.gradient-45deg-deep-purple-blue{background: linear-gradient(45deg,#100707,#f90a76)!important}
