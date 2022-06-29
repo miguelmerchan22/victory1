@@ -103,20 +103,20 @@ contract InfinitySystemV2 is Admin {
     uint256 blokesDirectos;
   }
 
-  uint256 public MIN_RETIRO = 5 * 10**18;
-  uint256 public PRECIO_BLOCK = 50 * 10**18;
+  uint256 public MIN_RETIRO = 9 * 10**18;
+  uint256 public PRECIO_BLOCK = 30 * 10**18;
   uint256 public PRECIO_BLOCK_infinity = 30 * 10**18;
-  uint256[] public primervez = [50, 30, 20, 10, 10];
-  uint256[] public porcientos = [15, 9, 6, 3, 3];
+  uint256[] public primervez = [90, 30, 10];
+  uint256[] public porcientos = [6, 2, 1];
   uint256[] public infinity = [5, 3, 2, 1, 1];
   bool[] public baserange = [false,false,false,false,false,false,false,false,false,false,false];
-  uint256[] public gananciasRango = [75*10**18,150*10**18,375*10**18,750*10**18, 1500*10**18, 3750*10**18, 7500*10**18, 15000*10**18, 50000*10**18, 150000*10**18, 250000*10**18];
-  uint256[] public puntosRango = [100*50*10**18, 200*50*10**18, 500*50*10**18, 1000*50*10**18, 2000*50*10**18, 5000*50*10**18, 10000*50*10**18, 20000*50*10**18, 100000*50*10**18, 300000*50*10**18, 500000*50*10**18];
+  uint256[] public gananciasRango = [30*10**18,90*10**18,180*10**18,780*10**18, 1980*10**18, 3780*10**18, 12780*10**18, 30780*10**18, 57780*10**18];
+  uint256[] public puntosRango = [3000*10**18, 6000*10**18, 9000*10**18, 30000*10**18, 60000*10**18, 90000*10**18, 300000*10**18, 600000*10**18, 900000*10**18];
   bool public onOffWitdrawl = true;
   uint256 public duracionMembership = 365;
   uint256 public dias = 900;
   uint256 public unidades = 86400;
-  uint256 public porcent = 240;
+  uint256 public porcent = 210;
   uint256 public descuento = 100;
   uint256 public personas = 2;
   uint256 public totalInvestors = 1;
