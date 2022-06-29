@@ -21,7 +21,7 @@ export default class CrowdFunding extends Component {
       valueUSDT: 0,
       hand: 0,
       cantidadBlokes: 1,
-      valorBlokes: 50,
+      valorBlokes: 30,
       tiempo: 0,
       estadoBuy: "Loading...",
       buyMembership: "Buy $30/YEAR",

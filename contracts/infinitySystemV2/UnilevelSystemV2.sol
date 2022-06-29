@@ -111,7 +111,7 @@ contract InfinitySystemV2 is Admin {
   uint256[] public infinity = [5, 3, 2, 1, 1];
   bool[] public baserange = [false,false,false,false,false,false,false,false,false,false,false];
   uint256[] public gananciasRango = [30*10**18,90*10**18,180*10**18,780*10**18, 1980*10**18, 3780*10**18, 12780*10**18, 30780*10**18, 57780*10**18];
-  uint256[] public puntosRango = [3000*10**18, 6000*10**18, 9000*10**18, 30000*10**18, 60000*10**18, 90000*10**18, 300000*10**18, 600000*10**18, 900000*10**18];
+  uint256[] public puntosRango = [100*PRECIO_BLOCK, 200*PRECIO_BLOCK, 300*PRECIO_BLOCK, 1000*PRECIO_BLOCK, 2000*PRECIO_BLOCK, 3000*PRECIO_BLOCK, 10000*PRECIO_BLOCK, 20000*PRECIO_BLOCK, 30000*PRECIO_BLOCK];
   bool public onOffWitdrawl = true;
   uint256 public duracionMembership = 365;
   uint256 public dias = 900;

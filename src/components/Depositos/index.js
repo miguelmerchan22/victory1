@@ -35,7 +35,7 @@ export default class Depositos extends Component {
       depositosInfy: "",
       totalDepositos: 0,
       totalInfinity: 0,
-      porcent: 240,
+      porcent: 210,
 
     };
 

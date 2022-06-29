@@ -206,14 +206,14 @@ export default class Oficina extends Component {
 
     this.setState({
       registered: usuario.registered,
-      balanceRef: usuario.balanceRef / 10 ** decimales,
-      totalRef: usuario.totalRef / 10 ** decimales,
-      invested: new BigNumber(usuario.invested).shiftedBy(-18).dividedBy(50),
-      paidAt: usuario.paidAt / 10 ** decimales,
+      balanceRef: new BigNumber(usuario.balanceRef).shiftedBy(-18).toNumber(10),
+      totalRef: new BigNumber(usuario.totalRef).shiftedBy(-18).toNumber(10) ,
+      invested: new BigNumber(usuario.invested).shiftedBy(-18).dividedBy(30),
+      paidAt: new BigNumber(usuario.paidAt).shiftedBy(-18).toNumber(10),
       my: usuario.withdrawable,
-      withdrawableInfinity: withdrawableInfinity / 10**decimales,
+      withdrawableInfinity: new BigNumber(withdrawableInfinity).shiftedBy(-18).toNumber(10),
       withdrawn: usuario.withdrawn,
-      almacen: usuario.almacen / 10 ** decimales,
+      almacen: new BigNumber(usuario.almacen).shiftedBy(-18).toNumber(10),
       progresoUsdt: progresoUsdt,
       progresoRetiro: progresoRetiro,
       valorPlan: valorPlan,
@@ -357,10 +357,10 @@ export default class Oficina extends Component {
     var funcionRango = () => {};
     var cantidad = "";
     var imageRango = 0;
-    var netxRango = [0, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 100000, 300000, 500000];
-    var nameRango = ["","BABY","SENIOR","MASTER","Infinity Lord / Madame","Infinity Baron / Baroness",
-    "Infinity Duke / Duchess","Infinity King / Queen 👑","Infinity Emperor/ Empress",
-    "Infinity Conqueror","Infinity World Lord / Madame","Infinity GOD" ]
+    var netxRango = [0, 10, 20, 30, 100, 200, 300, 1000, 2000, 3000, 10000, 20000, 30000];
+    var nameRango = ["","Energy","Frequency","Vibration","Bronze","Silver",
+    "Gold","Sapphire","Ruby","Emerauld",
+    "Diamond","Supreme Diamond","King/Queen Diamond" ]
 
     var textRango = "Next Rank "
 
@@ -462,7 +462,7 @@ export default class Oficina extends Component {
                             <h5 className="mb-0 white-text">
                               {invested} BLKS
                             </h5>
-                            <p className="no-margin">$ {invested*50}</p>
+                            <p className="no-margin">$ {invested*30}</p>
                           </div>
                           <div className="col s12 m12 right-align">
                             <p>Earned: $ {this.state.withdrawn.toFixed(2)}</p>
