@@ -350,7 +350,7 @@ export default class Oficina extends Component {
 
     //console.log(investor)
 
-    var rango = (new BigNumber(investor.blokesDirectos).shiftedBy(-18).toNumber())/50;
+    var rango = new BigNumber(investor.blokesDirectos).shiftedBy(-18).dividedBy(30).toNumber(10);
     var rangoArray = [];
     var rangoEstilo = "btn-secondary";
     var gananciasRango = "Claimed";

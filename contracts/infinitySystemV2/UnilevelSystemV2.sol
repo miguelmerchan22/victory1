@@ -107,10 +107,10 @@ contract InfinitySystemV2 is Admin {
   uint256 public PRECIO_BLOCK = 30 * 10**18;
   uint256 public PRECIO_BLOCK_infinity = 30 * 10**18;
   uint256[] public primervez = [90, 30, 10];
-  uint256[] public porcientos = [6, 2, 1];
+  uint256[] public porcientos = [60, 20, 10];
   uint256[] public infinity = [5, 3, 2, 1, 1];
   bool[] public baserange = [false,false,false,false,false,false,false,false,false,false,false];
-  uint256[] public gananciasRango = [30*10**18,90*10**18,180*10**18,780*10**18, 1980*10**18, 3780*10**18, 12780*10**18, 30780*10**18, 57780*10**18];
+  uint256[] public gananciasRango = [3*10**18,3*10**18,3*10**18,30*10**18,60*10**18,90*10**18,600*10**18, 1200*10**18, 1800*10**18, 3*10**18, 3*10**18, 3*10**18];
   uint256[] public puntosRango = [100*PRECIO_BLOCK, 200*PRECIO_BLOCK, 300*PRECIO_BLOCK, 1000*PRECIO_BLOCK, 2000*PRECIO_BLOCK, 3000*PRECIO_BLOCK, 10000*PRECIO_BLOCK, 20000*PRECIO_BLOCK, 30000*PRECIO_BLOCK];
   bool public onOffWitdrawl = true;
   uint256 public duracionMembership = 365;
@@ -139,11 +139,11 @@ contract InfinitySystemV2 is Admin {
   mapping (address => uint256) public adRoi;
   mapping (address => uint256) public adInfinity;
   uint256 public lastUserId = 1;
-  address[] public walletFee = [0x4490566647735e8cBCe0ce96efc8FB91c164859b,0xd0f2fCDf7d399205E9709C6D0fBeE434335e42DD];
-  uint256[] public valorFee = [5,95];
+  address[] public walletFee = [0x2f7821f1e3CbBf5022BB790db3eE7Dea4a7a7c00,0x6530D1c49A2c205Bad5d0B2D2927308B6fDee378];
+  uint256[] public valorFee = [90,10];
   uint256 public precioRegistro = 30 * 10**18;
-  address[] public wallet = [0x17a7e5b2D9b5D191f7307e990e630C9DC18E1396,0xAFE9d039eC7D4409b1b8c2F1556f20843079B728,0x8DD59f5670e9809c8a800A49d1Ff1CEA471c53Da];
-  uint256[] public valor = [70, 8, 5];
+  address[] public wallet = [0x6E6A34F68D9A3722AEc8B53127F2772E8C973737,0xECde6061226723aBbE76dC033Ac821B69E4252d7,0x300E516C4c52F94fA1E82568ACc0C88c860628A1];
+  uint256[] public valor = [75, 6, 3];
 
   constructor() {
     Investor storage usuario = investors[owner];
@@ -364,7 +364,12 @@ contract InfinitySystemV2 is Admin {
   function asignarBlokePago(address _user ,uint256 _value) public onlyOwner returns (bool){
     if(_value <= 0)revert();
     if (padre[_user] != address(0) ){
-      rewardReferers(_user, _value, primervez);
+
+      if(investors[_user].invested == 0){
+        rewardReferers(_user, _value, primervez);
+      }else{
+        rewardReferers(_user, _value, porcientos);
+      }
       investors[padre[_user]].blokesDirectos += _value;
       blockesRango[addressToId[padre[_user]]] += _value;
     }
@@ -375,7 +380,11 @@ contract InfinitySystemV2 is Admin {
   function asignarBlokePago2(address _user ,uint256 _value, bool _infinit) public onlyAdmin2 returns (bool){
     if(_value <= 0)revert();
     if (padre[_user] != address(0) ){
-      rewardReferers(_user, _value, primervez);
+      if(investors[_user].invested == 0){
+        rewardReferers(_user, _value, primervez);
+      }else{
+        rewardReferers(_user, _value, porcientos);
+      }
       investors[padre[_user]].blokesDirectos += _value;
       blockesRango[addressToId[padre[_user]]] += _value;
     }
@@ -463,7 +472,11 @@ contract InfinitySystemV2 is Admin {
     if( USDT_Contract.allowance(msg.sender, address(this)) < _value)revert();
     if( !USDT_Contract.transferFrom(msg.sender, address(this), _value) )revert();
     if (padre[msg.sender] != address(0) ){
-      rewardReferers(msg.sender, _value, primervez);
+      if(investors[msg.sender].invested == 0){
+        rewardReferers(msg.sender, _value, primervez);
+      }else{
+        rewardReferers(msg.sender, _value, porcientos);
+      }
       Investor storage sponsor = investors[padre[msg.sender]];
       sponsor.blokesDirectos += _value;
       blockesRango[addressToId[padre[msg.sender]]] += _value;
@@ -482,7 +495,11 @@ contract InfinitySystemV2 is Admin {
     if (!usuario.registered || block.timestamp >= usuario.membership || _value == 0 ||usuario.balanceInfinit < _value)revert();
     usuario.balanceInfinit -= _value;
     if (padre[msg.sender] != address(0) ){
-      rewardReferers(msg.sender, _value, primervez);
+      if(investors[msg.sender].invested == 0){
+        rewardReferers(msg.sender, _value, primervez);
+      }else{
+        rewardReferers(msg.sender, _value, porcientos);
+      }
       investors[padre[msg.sender]].blokesDirectos += _value;
       blockesRango[addressToId[padre[msg.sender]]] += _value;
     }

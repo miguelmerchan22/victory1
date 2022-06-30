@@ -22,6 +22,7 @@ export default class CrowdFunding extends Component {
       hand: 0,
       cantidadBlokes: 1,
       valorBlokes: 30,
+      valorBloke: 30,
       tiempo: 0,
       estadoBuy: "Loading...",
       buyMembership: "Buy $30/YEAR",
@@ -83,7 +84,7 @@ export default class CrowdFunding extends Component {
     var evento = event.target.value;
     this.setState({
       cantidadBlokes: evento,
-      valorBlokes: evento * 50,
+      valorBlokes: evento * this.state.valorBloke,
     });
   }
 
@@ -91,7 +92,7 @@ export default class CrowdFunding extends Component {
     var evento = event.target.value;
     this.setState({
       valorBlokes: evento,
-      cantidadBlokes: evento / 50,
+      cantidadBlokes: evento / this.state.valorBloke,
     });
   }
 
@@ -634,7 +635,7 @@ export default class CrowdFunding extends Component {
                       className="form-control center-align white-text"
                       value={this.state.valorBlokes}
                       onChange={this.handleChangeB}
-                      step="50"
+                      step={this.state.valorBloke}
                     /> 
                     <p className="mb-0">Total: $ {this.state.valorBlokes} </p>
                   </div>
