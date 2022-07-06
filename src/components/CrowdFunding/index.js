@@ -663,7 +663,6 @@ export default class CrowdFunding extends Component {
                                 <th>Blocks</th>
                                 <th>Capital</th>
                                 <th>Referrals</th>
-                                <th>Infinity ∞</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
@@ -674,7 +673,6 @@ export default class CrowdFunding extends Component {
                                 <td><b>{this.state.datos[0].blks}</b></td>
                                 <td><span className="badge orange-text text-accent-4">${this.state.datos[0].pasive.toFixed(2)}</span></td>
                                 <td><span className="badge green-text text-accent-4">${this.state.datos[0].refer.toFixed(2)}</span></td>
-                                <td><span className="badge green-text text-accent-4">${this.state.datos[0].infinity.toFixed(2)}</span></td>
                                 <td><span className="badge green-text text-accent-4">${(this.state.datos[0].refer+this.state.datos[0].infinity).toFixed(2)}</span></td>
                             </tr>
                             <tr>
@@ -683,7 +681,6 @@ export default class CrowdFunding extends Component {
                                 <td><b>{this.state.datos[1].blks}</b></td>
                                 <td><span className="badge orange-text text-accent-4">${this.state.datos[1].pasive.toFixed(2)}</span></td>
                                 <td><span className="badge green-text text-accent-4">${this.state.datos[1].refer.toFixed(2)}</span></td>
-                                <td><span className="badge green-text text-accent-4">${this.state.datos[1].infinity.toFixed(2)}</span></td>
                                 <td><span className="badge green-text text-accent-4">${(this.state.datos[1].refer+this.state.datos[1].infinity).toFixed(2)}</span></td>
                             </tr>
                             <tr>
@@ -692,26 +689,7 @@ export default class CrowdFunding extends Component {
                                 <td><b>{this.state.datos[2].blks}</b></td>
                                 <td><span className="badge orange-text text-accent-4">${this.state.datos[2].pasive.toFixed(2)}</span></td>
                                 <td><span className="badge green-text text-accent-4">${this.state.datos[2].refer.toFixed(2)}</span></td>
-                                <td><span className="badge green-text text-accent-4">${this.state.datos[2].infinity.toFixed(2)}</span></td>
                                 <td><span className="badge green-text text-accent-4">${(this.state.datos[2].refer+this.state.datos[2].infinity).toFixed(2)}</span></td>
-                            </tr>
-                            <tr>
-                                <td>Level 4</td>
-                                <td><b>{this.state.datos[3].team}</b></td>
-                                <td><b>{this.state.datos[3].blks}</b></td>
-                                <td><span className="badge orange-text text-accent-4">${this.state.datos[3].pasive.toFixed(2)}</span></td>
-                                <td><span className="badge green-text text-accent-4">${this.state.datos[3].refer.toFixed(2)}</span></td>
-                                <td><span className="badge green-text text-accent-4">${this.state.datos[3].infinity.toFixed(2)}</span></td>
-                                <td><span className="badge green-text text-accent-4">${(this.state.datos[3].refer+this.state.datos[3].infinity).toFixed(2)}</span></td>
-                            </tr>
-                            <tr>
-                                <td>Level 5</td>
-                                <td><b>{this.state.datos[4].team}</b></td>
-                                <td><b>{this.state.datos[4].blks}</b></td>
-                                <td><span className="badge orange-text text-accent-4">${this.state.datos[4].pasive.toFixed(2)}</span></td>
-                                <td><span className="badge green-text text-accent-4">${this.state.datos[4].refer.toFixed(2)}</span></td>
-                                <td><span className="badge green-text text-accent-4">${this.state.datos[4].infinity.toFixed(2)}</span></td>
-                                <td><span className="badge green-text text-accent-4">${(this.state.datos[4].refer+this.state.datos[4].infinity).toFixed(2)}</span></td>
                             </tr>
                             <tr>
                                 <td><b>Total</b></td>
@@ -719,7 +697,6 @@ export default class CrowdFunding extends Component {
                                 <td><b>{this.state.datos[0].blks+this.state.datos[1].blks+this.state.datos[2].blks+this.state.datos[3].blks+this.state.datos[4].blks}</b></td>
                                 <td><span className="badge orange-text text-accent-4">${(this.state.datos[0].pasive+this.state.datos[1].pasive+this.state.datos[2].pasive+this.state.datos[3].pasive+this.state.datos[4].pasive).toFixed(2)}</span></td>
                                 <td><span className="badge green-text text-accent-4">${(this.state.datos[0].refer+this.state.datos[1].refer+this.state.datos[2].refer+this.state.datos[3].refer+this.state.datos[4].refer).toFixed(2)}</span></td>
-                                <td><span className="badge green-text text-accent-4">${(this.state.datos[0].infinity+this.state.datos[1].infinity+this.state.datos[2].infinity+this.state.datos[3].infinity+this.state.datos[4].infinity).toFixed(2)}</span></td>
                                 <td><span className="badge green-text text-accent-4"><b>${
                                   (this.state.datos[0].refer+this.state.datos[0].infinity+
                                   this.state.datos[1].refer+this.state.datos[1].infinity+
