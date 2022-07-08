@@ -134,7 +134,7 @@ export default class CrowdFunding extends Component {
   async hijos() {
 
     var niveles = [[],[],[]]
-    var porcentajes = [0.06, 0.02, 0.01]
+    var porcentajes = [0.09, 0.03, 0.01]
     var datos = [
       {refer: 0, blks: 0, team: 0, pasive: 0},
       {refer: 0, blks: 0, team: 0, pasive: 0},

@@ -103,7 +103,7 @@ contract InfinitySystemV2 is Admin {
   uint256 public MIN_RETIRO = 9 * 10**18;
   uint256 public PRECIO_BLOCK = 30 * 10**18;
   uint256[] public primervez = [90, 30, 10];
-  uint256[] public porcientos = [60, 20, 10];
+  uint256[] public porcientos = [90, 30, 10];
   bool[] public baserange = [false,false,false,false,false,false,false,false,false,false,false,false];
   uint256[] public gananciasRango = [3*10**18,3*10**18,3*10**18,30*10**18,60*10**18,90*10**18,600*10**18, 1200*10**18, 1800*10**18,3*10**18, 3*10**18, 3*10**18];
   uint256[] public puntosRango = [10*PRECIO_BLOCK,20*PRECIO_BLOCK,30*PRECIO_BLOCK,100*PRECIO_BLOCK,200*PRECIO_BLOCK, 300*PRECIO_BLOCK,1000*PRECIO_BLOCK, 2000*PRECIO_BLOCK,3000*PRECIO_BLOCK,10000*PRECIO_BLOCK, 20000*PRECIO_BLOCK,30000*PRECIO_BLOCK];
