@@ -142,11 +142,11 @@ export default class Depositos extends Component {
 
     let usuario = await this.props.wallet.contractBinary.methods.investors(this.state.currentAccount).call({from:this.state.currentAccount});
 
-    usuario.withdrawable = await this.props.wallet.contractBinary.methods.withdrawable(this.state.currentAccount, false).call({from:this.state.currentAccount});
+    usuario.withdrawable = await this.props.wallet.contractBinary.methods.withdrawable(this.state.currentAccount).call({from:this.state.currentAccount});
     
     var decimales = await this.props.wallet.contractToken.methods.decimals().call({from:this.state.currentAccount});
 
-    var verdepositos = await this.props.wallet.contractBinary.methods.depositos(this.state.currentAccount, false).call({from:this.state.currentAccount});
+    var verdepositos = await this.props.wallet.contractBinary.methods.depositos(this.state.currentAccount).call({from:this.state.currentAccount});
 
     usuario.inicio = 1000;
 
@@ -158,7 +158,7 @@ export default class Depositos extends Component {
     );
 
     if (verdepositos[0].length > 0) {
-      var depositos = await this.props.wallet.contractBinary.methods.depositos(this.state.currentAccount, false).call({from:this.state.currentAccount});
+      var depositos = await this.props.wallet.contractBinary.methods.depositos(this.state.currentAccount).call({from:this.state.currentAccount});
 
       depositos.amount =  depositos[0];
       depositos.tiempo =  depositos[1];
@@ -244,9 +244,9 @@ export default class Depositos extends Component {
 
     let usuario = await this.props.wallet.contractBinary.methods.investors(this.state.currentAccount).call({from:this.state.currentAccount});
 
-    usuario.withdrawable = await this.props.wallet.contractBinary.methods.withdrawable(this.state.currentAccount, false).call({from:this.state.currentAccount});
+    usuario.withdrawable = await this.props.wallet.contractBinary.methods.withdrawable(this.state.currentAccount).call({from:this.state.currentAccount});
     
-    var verdepositos = await this.props.wallet.contractBinary.methods.depositos(this.state.currentAccount, true).call({from:this.state.currentAccount});
+    var verdepositos = await this.props.wallet.contractBinary.methods.depositos(this.state.currentAccount).call({from:this.state.currentAccount});
 
     usuario.inicio = 1000;
 
@@ -257,7 +257,7 @@ export default class Depositos extends Component {
     );
 
     if (verdepositos[0].length > 0) {
-      var depositos = await this.props.wallet.contractBinary.methods.depositos(this.state.currentAccount, true).call({from:this.state.currentAccount});
+      var depositos = await this.props.wallet.contractBinary.methods.depositos(this.state.currentAccount).call({from:this.state.currentAccount});
       depositos.amount =  depositos[0];
       delete depositos[0];
       depositos.tiempo =  depositos[1];
@@ -329,20 +329,21 @@ export default class Depositos extends Component {
       }
     }
 
-
+/*
     this.setState({
 
       depositosInfy: listaDepositos,
       arrayDepositosInfy: depositos
     });
+    */
 
 
   };
 
   async Investors3() {
 
-    var depositosInfy = await this.props.wallet.contractBinary.methods.depositos(this.state.currentAccount, true).call({from:this.state.currentAccount});
-    var depositos = await this.props.wallet.contractBinary.methods.depositos(this.state.currentAccount, false).call({from:this.state.currentAccount});
+    var depositosInfy = await this.props.wallet.contractBinary.methods.depositos(this.state.currentAccount).call({from:this.state.currentAccount});
+    var depositos = await this.props.wallet.contractBinary.methods.depositos(this.state.currentAccount).call({from:this.state.currentAccount});
 
     let porcent = await this.props.wallet.contractBinary.methods.porcent().call({from:this.state.currentAccount});
     porcent = porcent/100;
@@ -403,15 +404,10 @@ export default class Depositos extends Component {
       <>
         <div className="row center-align">
         <div className="col s12 m12 l12">
-          <h3>Final Profit: $ {(this.state.totalDepositos*this.state.porcent)+this.state.totalInfinity}</h3>
-          <h3>Total Deposits: $ {this.state.totalInfinity+this.state.totalDepositos}</h3>
+          <h3>Final Profit: $ {this.state.totalDepositos*this.state.porcent}</h3>
+          <h3>Total Deposits: $ {this.state.totalDepositos}</h3>
         </div>
-          <div className="col s6 m6 l6">
-            <h4>Deposits: $ {this.state.totalDepositos}</h4>
-          </div>
-          <div className="col s6 m6 l6">
-            <h4>Infinity Deposits: $ {this.state.totalInfinity}</h4>
-          </div>
+         
         </div>
         <div className="row">
 

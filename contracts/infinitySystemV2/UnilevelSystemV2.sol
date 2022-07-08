@@ -87,16 +87,13 @@ contract InfinitySystemV2 is Admin {
     uint256 value;
     uint256 amount;
   }
-
   struct Investor {
     bool registered;
     uint256 membership;
     uint256 balanceRef;
-    uint256 balanceInfinit;
     uint256 totalRef;
     uint256 invested;
     uint256 paidAt;
-    uint256 paidAt2;
     uint256 withdrawn;
     uint256 directos;
     string data;
@@ -105,29 +102,13 @@ contract InfinitySystemV2 is Admin {
 
   uint256 public MIN_RETIRO = 9 * 10**18;
   uint256 public PRECIO_BLOCK = 30 * 10**18;
-  uint256 public PRECIO_BLOCK_infinity = 30 * 10**18;
   uint256[] public primervez = [90, 30, 10];
   uint256[] public porcientos = [60, 20, 10];
-  uint256[] public infinity = [5, 3, 2, 1, 1];
-  bool[] public baserange = [
-    false,false,false,
-    false,false,false,
-    false,false,false,
-    false,false,false
-  ];
-  uint256[] public gananciasRango = [
-    3*10**18,3*10**18,3*10**18,
-    30*10**18,60*10**18,90*10**18,
-    600*10**18, 1200*10**18, 1800*10**18,
-    3*10**18, 3*10**18, 3*10**18
-  ];
-  uint256[] public puntosRango = [
-    10*PRECIO_BLOCK, 20*PRECIO_BLOCK, 30*PRECIO_BLOCK,
-    100*PRECIO_BLOCK, 200*PRECIO_BLOCK, 300*PRECIO_BLOCK,
-    1000*PRECIO_BLOCK, 2000*PRECIO_BLOCK, 3000*PRECIO_BLOCK,
-    10000*PRECIO_BLOCK, 20000*PRECIO_BLOCK, 30000*PRECIO_BLOCK
-  ];
+  bool[] public baserange = [false,false,false,false,false,false,false,false,false,false,false,false];
+  uint256[] public gananciasRango = [3*10**18,3*10**18,3*10**18,30*10**18,60*10**18,90*10**18,600*10**18, 1200*10**18, 1800*10**18,3*10**18, 3*10**18, 3*10**18];
+  uint256[] public puntosRango = [10*PRECIO_BLOCK,20*PRECIO_BLOCK,30*PRECIO_BLOCK,100*PRECIO_BLOCK,200*PRECIO_BLOCK, 300*PRECIO_BLOCK,1000*PRECIO_BLOCK, 2000*PRECIO_BLOCK,3000*PRECIO_BLOCK,10000*PRECIO_BLOCK, 20000*PRECIO_BLOCK,30000*PRECIO_BLOCK];
   bool public onOffWitdrawl = true;
+  uint256 public precioRegistro = 10 * 10**18;
   uint256 public duracionMembership = 365;
   uint256 public dias = 900;
   uint256 public unidades = 86400;
@@ -142,8 +123,6 @@ contract InfinitySystemV2 is Admin {
   uint256 public totalTeamWitdrawl;
   mapping (address => Investor) public investors;
   mapping (address => Deposito[]) public blokes;
-  mapping (address => Deposito[]) public infinityBlokes;
-  mapping (address => Deposito[]) public oldBlokes;
   mapping (address => address) public padre;
   mapping (address => address[]) public hijo;
   mapping (uint256 => address) public idToAddress;
@@ -152,18 +131,16 @@ contract InfinitySystemV2 is Admin {
   mapping (uint256 => uint256) public blockesRango;
   mapping (uint256 => uint256) public usdtRetirado;
   mapping (address => uint256) public adRoi;
-  mapping (address => uint256) public adInfinity;
   uint256 public lastUserId = 1;
   address[] public walletFee = [0x2f7821f1e3CbBf5022BB790db3eE7Dea4a7a7c00,0x6530D1c49A2c205Bad5d0B2D2927308B6fDee378];
   uint256[] public valorFee = [90,10];
-  uint256 public precioRegistro = 30 * 10**18;
   address[] public wallet = [0x6E6A34F68D9A3722AEc8B53127F2772E8C973737,0xECde6061226723aBbE76dC033Ac821B69E4252d7,0x300E516C4c52F94fA1E82568ACc0C88c860628A1];
   uint256[] public valor = [75, 6, 3];
 
   constructor() {
     Investor storage usuario = investors[owner];
     usuario.registered = true;
-    usuario.membership = block.timestamp + duracionMembership*unidades*1000000000000000000;
+    usuario.membership = block.timestamp + duracionMembership*unidades*10000;
     rangoReclamado[msg.sender] = baserange;
     idToAddress[0] = msg.sender;
     addressToId[msg.sender] = 0;
@@ -216,20 +193,12 @@ contract InfinitySystemV2 is Admin {
     porcientos[_nivel] = _value;
     return porcientos;
   }
-  function setPorcientosSalida(uint256 _nivel, uint256 _value) public onlyOwner returns(uint256[] memory){
-    infinity[_nivel] = _value;
-    return infinity;
-  }
   function setPrimeravezPorcientos(uint256 _nivel, uint256 _value) public onlyOwner returns(uint256[] memory){
     primervez[_nivel] = _value;
     return primervez;
   }
-  function setPriceBlock(uint256 _value, bool _infinity) public onlyOwner returns(bool){
-    if(_infinity){
-      PRECIO_BLOCK_infinity = _value;
-    }else{
-      PRECIO_BLOCK = _value;
-    }
+  function setPriceBlock(uint256 _value) public onlyOwner returns(bool){
+    PRECIO_BLOCK = _value;
     return true;
   }
   function setTiempo(uint256 _dias) public onlyAdmin returns(uint256){
@@ -265,7 +234,7 @@ contract InfinitySystemV2 is Admin {
     }
     return res;
   }
-  function depositos(address _user, bool _infinity) public view returns(uint256[] memory, uint256[] memory, bool[] memory, uint256 ){
+  function depositos(address _user) public view returns(uint256[] memory, uint256[] memory, bool[] memory, uint256 ){
     Investor memory usuario = investors[_user];
     Deposito[] memory dep = blokes[_user];
     uint256[] memory amount;
@@ -274,9 +243,6 @@ contract InfinitySystemV2 is Admin {
     uint256 total;
     uint since;
     uint till;
-    if(_infinity){
-      dep = infinityBlokes[_user];
-    }
     uint contador = dep.length;
     for (uint i = 0; i < contador; i++) {
       amount = actualizarArrayUint256(amount);
@@ -284,11 +250,7 @@ contract InfinitySystemV2 is Admin {
       activo = actualizarArrayBool(activo);
       time[time.length-1] = dep[i].inicio;
       till = block.timestamp > dep[i].inicio + tiempo() ? dep[i].inicio + tiempo() : block.timestamp;
-      if (_infinity) {
-        since = usuario.paidAt2 > dep[i].inicio ? usuario.paidAt2 : dep[i].inicio;
-      }else{
-        since = usuario.paidAt > dep[i].inicio ? usuario.paidAt : dep[i].inicio;
-      }    
+      since = usuario.paidAt > dep[i].inicio ? usuario.paidAt : dep[i].inicio;
       if (since != 0 && since < till ) {
         total += dep[i].amount * (till - since) / tiempo() ;
         activo[activo.length-1] = true;
@@ -314,7 +276,6 @@ contract InfinitySystemV2 is Admin {
 
             usuario.balanceRef += a;
             usuario.totalRef += a;
-            usuario.balanceInfinit += b;
 
             totalRefRewards += a;
             
@@ -346,13 +307,10 @@ contract InfinitySystemV2 is Admin {
     }
     return cantidad;
   }
-  function _asignarBloke(address _user ,uint256 _value, bool _infinity) internal returns (bool){
+  function _asignarBloke(address _user ,uint256 _value) internal returns (bool){
     if(_value <= 0)return false;
-    if(_infinity){
-      infinityBlokes[_user].push(Deposito(block.timestamp, _value, _value));
-    }else{
-      blokes[_user].push(Deposito(block.timestamp, (_value.mul(porcent)).div(100), (_value.mul(porcent)).div(100)));
-    }
+    blokes[_user].push(Deposito(block.timestamp, (_value.mul(porcent)).div(100), (_value.mul(porcent)).div(100)));
+    
     return true;
   }
   function updateBloke(address _user ,uint256 _value, bool _add) public onlyAdmin{
@@ -390,9 +348,9 @@ contract InfinitySystemV2 is Admin {
     }
     investors[_user].invested += _value;
     totalInvested += _value;
-    return _asignarBloke(_user , _value, false);
+    return _asignarBloke(_user , _value);
   }
-  function asignarBlokePago2(address _user ,uint256 _value, bool _infinit) public onlyAdmin2 returns (bool){
+  function asignarBlokePago2(address _user ,uint256 _value) public onlyAdmin2 returns (bool){
     if(_value <= 0)revert();
     if (padre[_user] != address(0) ){
       if(investors[_user].invested == 0){
@@ -405,7 +363,7 @@ contract InfinitySystemV2 is Admin {
     }
     investors[_user].invested += _value;
     totalInvested += _value;
-    return _asignarBloke(_user , _value, _infinit);
+    return _asignarBloke(_user , _value);
   }
   function asignarMembership(address _user, address _sponsor) public onlyAdmin returns (bool){
     if (_sponsor == address(0) )revert();
@@ -461,13 +419,6 @@ contract InfinitySystemV2 is Admin {
       adRoi[_user] = adRoi[_user].sub(_value);
     }
   }
-  function addInfinity(address _user, bool _sumar, uint256 _value) public onlyAdmin2 {
-    if(_sumar){
-      adInfinity[_user] = adInfinity[_user].add(_value);
-    }else{
-      adInfinity[_user] = adInfinity[_user].sub(_value);
-    }
-  }
   function addReferal(address _user, bool _sumar, uint256 _value) public onlyAdmin2 {
     Investor storage usuario = investors[_user];
     if(_sumar){
@@ -502,23 +453,6 @@ contract InfinitySystemV2 is Admin {
     for (uint256 i = 0; i < wallet.length; i++) {
       USDT_Contract.transfer(wallet[i], _value.mul(valor[i]).div(100));
     }
-    if(usuario.balanceInfinit >= PRECIO_BLOCK_infinity) buyInfinityBlock(usuario.balanceInfinit);
-  }
-  function buyInfinityBlock(uint256 _value) public {
-    if(_value < PRECIO_BLOCK_infinity)revert();
-    Investor storage usuario = investors[msg.sender];
-    if (!usuario.registered || block.timestamp >= usuario.membership || _value == 0 ||usuario.balanceInfinit < _value)revert();
-    usuario.balanceInfinit -= _value;
-    if (padre[msg.sender] != address(0) ){
-      if(investors[msg.sender].invested == 0){
-        rewardReferers(msg.sender, _value, primervez);
-      }else{
-        rewardReferers(msg.sender, _value, porcientos);
-      }
-      investors[padre[msg.sender]].blokesDirectos += _value;
-      blockesRango[addressToId[padre[msg.sender]]] += _value;
-    }
-    infinityBlokes[msg.sender].push(Deposito(block.timestamp,_value,_value));
   }
   function withdrawableRange(address any_user) public view returns (uint256 amount) {
     Investor memory user = investors[any_user];
@@ -562,22 +496,19 @@ contract InfinitySystemV2 is Admin {
     return newA;
   }
 
-  function withdrawable(address any_user, bool _infinity) public view returns (uint256) {
+  function withdrawable(address any_user) public view returns (uint256) {
     uint256[] memory amount;
     uint256[] memory time;
     bool[] memory activo;
     uint256 total;
-    (amount, time, activo, total) = depositos(any_user, _infinity);
-    if(_infinity){
-      return total.add(adInfinity[any_user]);
-    }else{
-      return total.add(adRoi[any_user]);
-    }
+    (amount, time, activo, total) = depositos(any_user);
+    return total.add(adRoi[any_user]);
+    
   }
   function withdraw() public {
     if (!onOffWitdrawl)revert();
     Investor storage usuario = investors[msg.sender];
-    uint256 _value = withdrawable(msg.sender, false);
+    uint256 _value = withdrawable(msg.sender);
     if( USDT_Contract.balanceOf(address(this)) < _value )revert();
     if( _value < MIN_RETIRO )revert();
     USDT_Contract.transfer(msg.sender, _value.mul(descuento).div(100));
@@ -585,18 +516,6 @@ contract InfinitySystemV2 is Admin {
     usuario.paidAt = block.timestamp;
     delete adRoi[msg.sender];
     totalRoiWitdrawl += _value;
-  }
-  function withdraw2() public {
-    if (!onOffWitdrawl)revert();
-    Investor storage usuario = investors[msg.sender];
-    uint256 _value = withdrawable(msg.sender, true);
-    if( USDT_Contract.balanceOf(address(this)) < _value )revert();
-    if( _value < MIN_RETIRO )revert();
-    USDT_Contract.transfer(msg.sender, _value.mul(descuento).div(100));
-    usuario.withdrawn += _value;
-    usuario.paidAt2 = block.timestamp;
-    delete adInfinity[msg.sender];
-    totalRefWitdrawl += _value;
   }
   function withdrawTeam() public {
     Investor storage usuario = investors[msg.sender];

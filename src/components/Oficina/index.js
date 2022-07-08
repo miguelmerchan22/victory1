@@ -147,11 +147,11 @@ export default class Oficina extends Component {
       .call({ from: this.state.currentAccount });
 
     usuario.withdrawable = await this.props.wallet.contractBinary.methods
-      .withdrawable(this.state.currentAccount, false)
+      .withdrawable(this.state.currentAccount)
       .call({ from: this.state.currentAccount });
 
     var withdrawableInfinity = await this.props.wallet.contractBinary.methods
-      .withdrawable(this.state.currentAccount, true)
+      .withdrawable(this.state.currentAccount)
       .call({ from: this.state.currentAccount });
 
     var decimales = await this.props.wallet.contractToken.methods
@@ -159,7 +159,7 @@ export default class Oficina extends Component {
       .call({ from: this.state.currentAccount });
 
     var despositos = await this.props.wallet.contractBinary.methods
-      .depositos(this.state.currentAccount, false)
+      .depositos(this.state.currentAccount)
       .call({ from: this.state.currentAccount });
 
     var valores = despositos[0];
@@ -232,7 +232,7 @@ export default class Oficina extends Component {
   async Investors3() {
 
     var available = await this.props.wallet.contractBinary.methods
-      .withdrawable(this.state.currentAccount, false)
+      .withdrawable(this.state.currentAccount)
       .call({ from: this.state.currentAccount });
 
     available = available / 10 ** 18;
@@ -449,7 +449,7 @@ export default class Oficina extends Component {
             <div id="card-stats" className="pt-0">
                 <div className="row">
 
-                  <div className="col s12 m3 l3 xl3">
+                  <div className="col s12 m4">
                     <div className="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text animate fadeLeft">
                       <div className="padding-4">
                         <div className="row">
@@ -472,7 +472,7 @@ export default class Oficina extends Component {
                     </div>
                   </div>
 
-                  <div className="col s12 m3 l3 xl3">
+                  <div className="col s12 m4">
                     <div className="card gradient-45deg-amber-amber gradient-shadow min-height-100 white-text animate fadeRight">
                       <div className="padding-4">
                         <div className="row">
@@ -497,33 +497,7 @@ export default class Oficina extends Component {
                     </div>
                   </div>
 
-                  <div className="col s12 m3 l3 xl3">
-                    <div className="card gradient-45deg-red-pink gradient-shadow min-height-100 white-text animate fadeLeft">
-                      <div className="padding-4">
-                        <div className="row">
-                          <div className="col s4 m4">
-                            <i className="material-icons background-round mt-5">
-                              perm_identity
-                            </i>
-                          </div>
-                          <div className="col s8 m8 right-align mb-7">
-                            <h6 className="mb-0 white-text">$ {(this.state.withdrawableInfinity).toFixed(6)}</h6>
-                            <p className="no-margin">Infinity ∞</p>
-                          </div>
-                          <div className="col s12 m12">
-                            <button
-                              className="waves-effect waves-light btn mb-1 mr-1 ancho100"
-                              onClick={() => this.withdraw2()}
-                            >
-                              Withdraw
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col s12 m3 l3 xl3">
+                  <div className="col s12 m4">
                     <div className="card gradient-45deg-green-teal gradient-shadow min-height-100 white-text animate fadeRight">
                       <div className="padding-4">
                         <div className="row">
