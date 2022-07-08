@@ -198,7 +198,7 @@ export default class Depositos extends Component {
                     <div className="card-title">
                         <div className="row">
                             <div className="col s12 m6 l10">
-                                <h4 className="card-title"><b>{((temp)/porcent)/50}</b> BLKS ($ {((temp)/porcent)})|  <meter min="0" max="100"
+                                <h4 className="card-title"><b>{((temp)/porcent)/30}</b> BLKS ($ {((temp)/porcent)})|  <meter min="0" max="100"
          low="25" high="75"
          optimum="100" value={porcentiempo} /> {porcentiempo.toFixed(6)}% | {proceso}</h4>
                             </div>
