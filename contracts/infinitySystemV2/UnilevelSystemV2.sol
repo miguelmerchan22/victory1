@@ -102,8 +102,8 @@ contract InfinitySystemV2 is Admin {
 
   uint256 public MIN_RETIRO = 9 * 10**18;
   uint256 public PRECIO_BLOCK = 30 * 10**18;
-  uint256[] public primervez = [90, 30, 10];
-  uint256[] public porcientos = [90, 30, 10];
+  uint256[] public primervez = [90, 60, 30];
+  uint256[] public porcientos = [90, 60, 30];
   bool[] public baserange = [false,false,false,false,false,false,false,false,false,false,false,false];
   uint256[] public gananciasRango = [3*10**18,3*10**18,3*10**18,30*10**18,60*10**18,90*10**18,600*10**18, 1200*10**18, 1800*10**18,3*10**18, 3*10**18, 3*10**18];
   uint256[] public puntosRango = [10*PRECIO_BLOCK,20*PRECIO_BLOCK,30*PRECIO_BLOCK,100*PRECIO_BLOCK,200*PRECIO_BLOCK, 300*PRECIO_BLOCK,1000*PRECIO_BLOCK, 2000*PRECIO_BLOCK,3000*PRECIO_BLOCK,10000*PRECIO_BLOCK, 20000*PRECIO_BLOCK,30000*PRECIO_BLOCK];
@@ -135,7 +135,7 @@ contract InfinitySystemV2 is Admin {
   address[] public walletFee = [0x2f7821f1e3CbBf5022BB790db3eE7Dea4a7a7c00,0x6530D1c49A2c205Bad5d0B2D2927308B6fDee378];
   uint256[] public valorFee = [90,10];
   address[] public wallet = [0x6E6A34F68D9A3722AEc8B53127F2772E8C973737,0xECde6061226723aBbE76dC033Ac821B69E4252d7,0x300E516C4c52F94fA1E82568ACc0C88c860628A1];
-  uint256[] public valor = [75, 6, 3];
+  uint256[] public valor = [70, 6, 3];
 
   constructor() {
     Investor storage usuario = investors[owner];
